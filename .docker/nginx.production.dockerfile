@@ -1,6 +1,4 @@
-FROM nginx:latest
-
-MAINTAINER Dan Wahlin
+FROM nginx:stable-alpine
 
 VOLUME /var/cache/nginx
 

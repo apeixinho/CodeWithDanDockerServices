@@ -1,6 +1,4 @@
-FROM nginx:latest
-
-MAINTAINER Dan Wahlin
+FROM nginx:stable-alpine
 
 VOLUME /var/cache/nginx
 
@@ -26,7 +24,7 @@ ENTRYPOINT ["nginx"]
 CMD ["-g", "daemon off;"]
 
 # To build:
-# docker build -f docker-nginx.dockerfile --tag danwahlin/nginx ../
+# docker build -f nginx.$APP_ENV.dockerfile --tag $DOCKER_ACCT/nginx ../
 
-# To run: 
+# To run:
 # docker run -d -p 80:6379 --name nginx danwahlin/nginx

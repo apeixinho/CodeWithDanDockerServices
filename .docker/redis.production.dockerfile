@@ -1,6 +1,4 @@
-FROM 		redis:latest
-
-MAINTAINER 	Dan Wahlin
+FROM 		redis:alpine
 
 COPY        ./.docker/config/redis.production.conf /etc/redis.conf
 

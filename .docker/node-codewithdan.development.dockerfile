@@ -1,8 +1,8 @@
-FROM 		node:latest
+FROM 		node:8-alpine
 
 WORKDIR /var/www/codewithdan
 
-RUN npm install -g pm2@latest
+RUN npm install -g pm2@latest && npm install
 
 RUN mkdir -p /var/log/pm2
 

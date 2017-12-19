@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # https://github.com/frodenas/docker-mongodb/blob/master/Dockerfile
 
 ROOT_USER=${MONGODB_ROOT_USERNAME}
@@ -19,8 +19,8 @@ echo "Starting MongoDB to add users and roles...."
 while ! nc -vz localhost 27017; do sleep 1; done
 
 #Set authSchema to 3 so it works with RoboMongo
-#echo "Setting authSchema to currentVersion:3"
-#mongo $ROOT_DB --eval "db.system.version.save({ '_id' : 'authSchema', 'currentVersion' : 3 });"
+echo "Setting authSchema to currentVersion:3"
+mongo $ROOT_DB --eval "db.system.version.save({ '_id' : 'authSchema', 'currentVersion' : 3 });"
 
 # Create Root User if there are values (-z means empty, -n means not empty)
 if [[ -n $ROOT_USER ]] && [[ -n $ROOT_PASS ]] && [[ -n $ROOT_ROLE ]]

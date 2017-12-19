@@ -1,5 +1,5 @@
 mongo:
-  image: '<yourHubAccount>/mongo:latest'
+  image: '<yourHubAccount>/mvertes/alpine-mongo'
   environment:
     - MONGODB_DBNAME=codeWithDan
     - MONGODB_PASSWORD=password
@@ -11,7 +11,7 @@ mongo:
   ports:
     - '27017:27017'
 nginx:
-  image: '<yourHubAccount>/nginx:latest'
+  image: '<yourHubAccount>/nginx:stable-alpine'
   links:
     - node1
     - node2
@@ -50,6 +50,6 @@ node3:
     - '8080'
   working_dir: /var/www/codewithdan
 redis:
-  image: '<yourHubAccount>/redis:latest'
+  image: '<yourHubAccount>/redis:alpine'
   ports:
     - '6379'

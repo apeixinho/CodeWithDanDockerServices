@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/bin/sh
+
 APP_ENV=${APP_ENV}
 
 configFile=/etc/redis.$APP_ENV.conf

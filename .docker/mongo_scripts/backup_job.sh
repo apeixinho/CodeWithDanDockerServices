@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # Backup MongoDB
 
 ROOT_USER=${MONGODB_ROOT_USERNAME}
