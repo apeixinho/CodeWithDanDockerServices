@@ -41,7 +41,6 @@ services:
       networks:
         - codewithdan-network
       depends_on:
-        - mongo
         - redis
       
     node2:
@@ -60,7 +59,6 @@ services:
       networks:
         - codewithdan-network
       depends_on:
-        - mongo
         - redis
       
     node3:
@@ -79,7 +77,6 @@ services:
       networks:
         - codewithdan-network
       depends_on:
-        - mongo
         - redis
       
     mongo:
@@ -94,6 +91,9 @@ services:
         - ./.docker/env/mongo.${APP_ENV}.env
       networks:
         - codewithdan-network
+      depends_on:
+        - nginx
+        - redis
         
     redis:
       container_name: redis
