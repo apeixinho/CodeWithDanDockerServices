@@ -3,24 +3,43 @@
 # https://stackoverflow.com/questions/5725296/difference-between-sh-and-bash
 
 # Initialize first run
-if [[ -e /.firstrun ]]; then
+if [ -e /.firstrun ]; then
+    
+    
+    echo () (
+        fmt=%s end=\\n IFS=" "
+        
+        while [ $# -gt 1 ] ; do
+            case "$1" in
+                [!-]*|-*[!ne]*) break ;;
+                *ne*|*en*) fmt=%b end= ;;
+                *n*) end= ;;
+                *e*) fmt=%b ;;
+            esac
+            shift
+        done
+        
+        printf "$fmt$end" "$*"
+    )
+    
     echo "Running entrypoint.sh"
     /mongo_scripts/entrypoint.sh
     
-        
+    
     echo "Scheduling backup CRON job for 13:00"
-    #cat < crontab -l < echo "00 13 * * * /mongo_scripts/backup_job.sh" | crontab -
-    echo "00 13 * * * /mongo_scripts/backup_job.sh" > crontab.tmp
-
+    # cat < crontab -l < echo "00 13 * * * /mongo_scripts/backup_job.sh" | crontab -
+    cat <(crontab -l) <(echo () "00 13 * * * /mongo_scripts/backup_job.sh") | crontab -
+    # echo "00 13 * * * /mongo_scripts/backup_job.sh" > crontab.tmp
+    
     #echo '* */6 * * * /usr/bin/php /var/www/partkeepr/app/console partkeepr:cron:run' > crontab.tmp \
-#     && echo '0 2   * * * /usr/bin/sql_backup' >> crontab.tmp \
-#     && crontab crontab.tmp \
-#     && rm -rf crontab.tmp
-
-
+    #     && echo '0 2   * * * /usr/bin/sql_backup' >> crontab.tmp \
+    #     && crontab crontab.tmp \
+    #     && rm -rf crontab.tmp
+    
+    
     echo "Scheduling backup CRON job for 1:00"
-    #cat <(crontab -l) <(echo "00 01 * * * /mongo_scripts/backup_job.sh") | crontab -
-    echo "00 01 * * * /mongo_scripts/backup_job.sh" >> crontab.tmp
+    # cat < crontab -l < echo "00 01 * * * /mongo_scripts/backup_job.sh" | crontab -
+    echo "00 01 * * * /mongo_scripts/backup_job.sh" | crontab -
     # * * * * * CRON job time to be executed
     # - - - - -
     # | | | | |
@@ -29,7 +48,7 @@ if [[ -e /.firstrun ]]; then
     # | | --------- Day of month (1 - 31)
     # | ----------- Hour (0 - 23)
     # ------------- Minute (0 - 59)
-
+    
     
     echo "Running first_run.sh"
     /mongo_scripts/first_run.sh

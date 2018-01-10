@@ -1,5 +1,7 @@
 FROM 		node:8-alpine
 
+LABEL author="Dan Wahlin"
+
 WORKDIR /var/www/codewithdan
 
 RUN npm install -g pm2@latest && npm install

@@ -1,5 +1,7 @@
 FROM 		node:8-alpine
 
+LABEL author="Dan Wahlin"
+
 COPY    . /var/www/codewithdan
 WORKDIR /var/www/codewithdan
 
